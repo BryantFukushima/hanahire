@@ -1,6 +1,6 @@
 # HanaHire
 
-> **From hunt to hired, then pau hana.**
+> **From job search to hired to pau hana.**
 
 HanaHire is an AI-powered job search copilot. Upload your resume, tell it what you're looking for, and it finds, ranks, and helps you apply to the jobs that actually fit you — with you approving every application before it goes out.
 
