@@ -73,9 +73,11 @@ HanaHire is an AI-powered job search copilot. Upload your resume, tell it what y
 - [ ] Application autofill with review/approval flow
 - [ ] Application tracking dashboard
 
+See [docs/ROADMAP.md](docs/ROADMAP.md) for the phase-by-phase PR breakdown.
+
 ## Tech stack
 
-_To be determined._
+TypeScript · Next.js (App Router) · Tailwind CSS · PostgreSQL + Prisma · Auth.js · Claude API · Playwright · Vitest · GitHub Actions
 
 ## Getting started
 
