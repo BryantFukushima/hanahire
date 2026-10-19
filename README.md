@@ -83,6 +83,10 @@ _Setup instructions will be added once the project is scaffolded._
 
 ---
 
+## License
+
+[MIT](LICENSE)
+
 ## Author
 
 **Bryant Fukushima** — [GitHub](https://github.com/BryantFukushima)
