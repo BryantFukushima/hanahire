@@ -85,7 +85,7 @@ _Setup instructions will be added once the project is scaffolded._
 
 ## License
 
-[MIT](LICENSE)
+Copyright © 2026 Bryant Fukushima. All rights reserved. See [LICENSE](LICENSE).
 
 ## Author
 
