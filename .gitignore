@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Personal data — never commit real resumes or application data
+uploads/
+data/private/
+*.pdf
+*.docx
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
