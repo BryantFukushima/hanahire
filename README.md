@@ -1,10 +1,10 @@
 # HanaHire
 
-> **From job search to hired to pau hana.**
+> **We draft. You decide. You get hired.**
 
 HanaHire is an AI-powered job search copilot. Upload your resume, tell it what you're looking for, and it finds, ranks, and helps you apply to the jobs that actually fit you — with you approving every application before it goes out.
 
-*Hana* is Hawaiian for "work." *Pau hana* — "work is finished" — is what people in Hawaiʻi say when it's time to unwind. HanaHire handles the tedious parts of the job hunt so you can get there sooner.
+*Hana* is Hawaiian for "work."
 
 ---
 
