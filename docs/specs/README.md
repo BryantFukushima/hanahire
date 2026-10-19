@@ -1,7 +1,7 @@
 # Specs
 
 HanaHire uses **spec-driven development**: every phase in [`ROADMAP.md`](../ROADMAP.md) has a spec,
-written and approved *before* any code is written. Specs keep requirements, design, and progress in
+written and approved _before_ any code is written. Specs keep requirements, design, and progress in
 the repo, so anyone (human or AI agent) can pick up the project without lost context.
 
 ## Lifecycle
@@ -23,6 +23,6 @@ Significant technical choices get their own [ADR](../adr/README.md), linked from
 
 ## Index
 
-| Spec                                   | Phase | Status |
-| -------------------------------------- | ----- | ------ |
-| [000-foundation](000-foundation.md)    | 0     | Draft  |
+| Spec                                | Phase | Status      |
+| ----------------------------------- | ----- | ----------- |
+| [000-foundation](000-foundation.md) | 0     | In progress |

@@ -1,11 +1,11 @@
 # NNN: Title
 
-| Field   | Value                                  |
-| ------- | -------------------------------------- |
-| Status  | Draft · Approved · In progress · Done  |
-| Phase   | N (see [ROADMAP](../ROADMAP.md))       |
-| Owner   | @BryantFukushima                       |
-| Updated | YYYY-MM-DD                             |
+| Field   | Value                                 |
+| ------- | ------------------------------------- |
+| Status  | Draft · Approved · In progress · Done |
+| Phase   | N (see [ROADMAP](../ROADMAP.md))      |
+| Owner   | @BryantFukushima                      |
+| Updated | YYYY-MM-DD                            |
 
 ## Context
 
@@ -17,7 +17,7 @@ What problem this solves and where it fits in the product. Link related specs an
 
 ## Non-goals
 
-- What this phase explicitly will *not* do, to keep scope tight.
+- What this phase explicitly will _not_ do, to keep scope tight.
 
 ## Requirements
 

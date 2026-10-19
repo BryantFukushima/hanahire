@@ -15,6 +15,6 @@ to `NNNN-short-title.md`.
 
 ## Index
 
-| ADR                                                   | Title                              | Status   |
-| ----------------------------------------------------- | ---------------------------------- | -------- |
-| [0001](0001-use-typescript-nextjs-stack.md)           | Use a full TypeScript / Next.js stack | Accepted |
+| ADR                                         | Title                                 | Status   |
+| ------------------------------------------- | ------------------------------------- | -------- |
+| [0001](0001-use-typescript-nextjs-stack.md) | Use a full TypeScript / Next.js stack | Accepted |

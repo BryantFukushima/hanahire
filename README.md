@@ -4,28 +4,32 @@
 
 HanaHire is an AI-powered job search copilot. Upload your resume, tell it what you're looking for, and it finds, ranks, and helps you apply to the jobs that actually fit you — with you approving every application before it goes out.
 
-*Hana* is Hawaiian for "work."
+_Hana_ is Hawaiian for "work."
 
 ---
 
 ## Features
 
 ### 🔍 Resume-driven job search
+
 - Parses your resume to understand your skills, experience, and seniority
 - Search filters for role type, salary range, location, remote/hybrid/onsite, and more
 - Pulls listings from multiple job sources
 
 ### 📊 Match ranking
+
 - Scores each job against your resume
-- Explains *why* a job ranks high or low (matching skills, gaps, seniority fit)
+- Explains _why_ a job ranks high or low (matching skills, gaps, seniority fit)
 - Surfaces the best opportunities first so your time goes where it counts
 
 ### ✍️ Tailored application materials
+
 - Tailors your resume to emphasize the experience most relevant to each role
 - Generates cover letters specific to the company and position
 - Drafts answers to application questions ("Why do you want to work here?", etc.)
 
 ### 📝 Application autofill — with human review
+
 - Pre-fills application forms using your resume and generated answers
 - **Nothing is submitted without your explicit approval** — review, edit, then send
 - Tracks what you've applied to and where each application stands
@@ -64,6 +68,7 @@ HanaHire is an AI-powered job search copilot. Upload your resume, tell it what y
 🚧 **In early development.** The project is being planned and scaffolded.
 
 ### Roadmap
+
 - [ ] Project scaffolding and tech stack
 - [ ] Resume upload and parsing
 - [ ] Job search with filters (role, salary, location, remote)
@@ -77,11 +82,23 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the phase-by-phase PR breakdown.
 
 ## Tech stack
 
-TypeScript · Next.js (App Router) · Tailwind CSS · PostgreSQL + Prisma · Auth.js · Claude API · Playwright · Vitest · GitHub Actions
+TypeScript · Next.js (App Router) · Tailwind CSS · PostgreSQL + Prisma · Better Auth (planned) · Claude API · Playwright · Vitest · GitHub Actions
 
 ## Getting started
 
-_Setup instructions will be added once the project is scaffolded._
+**Prerequisites:** Node.js 24 LTS (see `.nvmrc`) and [pnpm](https://pnpm.io).
+
+```bash
+git clone git@github.com:BryantFukushima/hanahire.git
+cd hanahire
+nvm use              # or install Node 24 LTS another way
+pnpm install
+cp .env.example .env.local
+pnpm dev             # http://localhost:3000
+```
+
+Run `pnpm check` to run every check (lint, typecheck, tests, build, formatting) before opening a PR.
+Individual scripts: `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`, `pnpm format`.
 
 ---
 
