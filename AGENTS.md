@@ -100,6 +100,7 @@ fixes instead of rewriting.
   split it into the numbered PRs listed in `docs/ROADMAP.md`.
 - Branch names: `phase-<N>/<short-kebab-name>`, e.g. `phase-1/resume-upload`.
   For split phases, include the PR number: `phase-1/1.2-text-extraction`.
+  Maintenance outside the roadmap (dependency or tooling fixes): `chore/<short-kebab-name>`.
 - Aim for PRs a human can review in one sitting (roughly under 400 changed lines, not counting
   lockfiles and generated code).
 

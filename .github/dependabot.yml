@@ -18,6 +18,10 @@ updates:
     # are usually caught and pulled before they reach this repo.
     cooldown:
       default-days: 5
+    ignore:
+      # @types/node must match the Node runtime major in .nvmrc. Bump them together by hand.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     groups:
       # Minor and patch updates arrive as one weekly PR; major versions get their own PRs.
       minor-and-patch:
