@@ -27,7 +27,7 @@
 
 ## Checklist
 
-- [ ] `pnpm lint && pnpm typecheck && pnpm test && pnpm build` pass
+- [ ] `pnpm check` passes
 - [ ] Tests added/updated for behavior changes
 - [ ] No secrets, real resumes, or personal data committed
 - [ ] Spec tasks and progress log updated; ADR added for any significant decision

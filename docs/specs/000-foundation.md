@@ -1,11 +1,11 @@
 # 000: Foundation
 
-| Field   | Value                                  |
-| ------- | -------------------------------------- |
-| Status  | Draft                                  |
-| Phase   | 0 (see [ROADMAP](../ROADMAP.md))       |
-| Owner   | @BryantFukushima                       |
-| Updated | 2026-10-19                             |
+| Field   | Value                            |
+| ------- | -------------------------------- |
+| Status  | In progress                      |
+| Phase   | 0 (see [ROADMAP](../ROADMAP.md)) |
+| Owner   | @BryantFukushima                 |
+| Updated | 2026-10-19                       |
 
 ## Context
 
@@ -34,7 +34,8 @@ Stack decision: [ADR 0001](../adr/0001-use-typescript-nextjs-stack.md).
 - **R3:** The app fails fast with a clear error if required env vars are missing.
 - **R4:** CI runs R2's checks on every PR and blocks merging on failure.
 - **R5:** `pnpm db:up && pnpm db:migrate` gives a working local database.
-- **R6:** A user can sign in and out. Protected pages redirect signed-out users.
+- **R6:** A user can sign in and out with Google or GitHub. Protected pages redirect signed-out users.
+- **R7:** Only emails on an allowlist (env var) can sign in. Everyone else sees a clear "not invited" message.
 
 ## Acceptance criteria
 
@@ -49,8 +50,11 @@ To be detailed per PR during planning. Initial direction:
 - `src/` layout with `src/app` (routes), `src/lib` (shared code), `src/server` (server-only code)
 - `src/env.ts`: Zod schema for env vars, imported at startup
 - `docker-compose.yml`: Postgres for local development
-- `prisma/schema.prisma`: `User` (+ Auth.js tables)
-- Auth.js provider: to be decided in PR 0.5 (likely GitHub OAuth or email magic link)
+- `prisma/schema.prisma`: `User` (+ the auth library's session/account tables)
+- Auth: Google + GitHub OAuth, with an email allowlist to control access and LLM cost.
+  Library decided in ADR 0002 during PR 0.5 planning (leaning Better Auth, since Auth.js is now
+  maintained by the Better Auth team).
+- Node.js: latest **LTS** release, pinned in `.nvmrc` and `package.json` `engines`.
 
 ## Security and privacy
 
@@ -64,17 +68,20 @@ To be detailed per PR during planning. Initial direction:
 ## Tasks / PR breakdown
 
 - [x] **PR 0.1: Project docs** (branch `phase-0/project-docs`)
-- [ ] **PR 0.2: Scaffold app** (branch `phase-0/0.2-scaffold`)
+- [x] **PR 0.2: Scaffold app** (branch `phase-0/0.2-scaffold`)
 - [ ] **PR 0.3: CI** (branch `phase-0/0.3-ci`)
 - [ ] **PR 0.4: Database** (branch `phase-0/0.4-database`)
 - [ ] **PR 0.5: Auth** (branch `phase-0/0.5-auth`)
 
 ## Open questions
 
-- Auth provider for 0.5: GitHub OAuth (simple, dev-friendly) or email magic link (more realistic for job seekers)?
-- Node version to pin (`.nvmrc` / `engines`)
+- Follow-up: bump Node 24 → 26 in a small chore PR once 26 becomes LTS (2026-10-28).
+- Auth library (Better Auth vs. Auth.js): decide in ADR 0002 when planning PR 0.5
 
 ## Progress log
 
 - 2026-10-19: Spec drafted. Stack chosen (ADR 0001).
 - 2026-10-19: PR 0.1 adds agent instructions (`AGENTS.md`, `CLAUDE.md`), roadmap, spec/ADR structure, and PR template.
+- 2026-10-19: Resolved: Google + GitHub providers with email allowlist; latest Node LTS.
+- 2026-10-19: Spec approved.
+- 2026-10-19: PR 0.2 scaffolds Next.js 16.4 (App Router, Tailwind v4, Turbopack), Vitest, Prettier, and Zod env validation. Pinned Node 24 LTS (bump to 26 after it becomes LTS on 2026-10-28) and TypeScript 6.0.3 (typescript-eslint doesn't support TS 7 yet).

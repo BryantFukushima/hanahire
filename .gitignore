@@ -9,11 +9,17 @@ __pycache__/
 .venv/
 venv/
 
+# Testing
+coverage/
+
 # Build output
 dist/
 build/
 .next/
 out/
+*.tsbuildinfo
+next-env.d.ts
+.vercel
 
 # Environment / secrets
 .env
@@ -29,6 +35,10 @@ data/private/
 # Logs
 *.log
 npm-debug.log*
+.pnpm-debug.log*
+
+# Certificates
+*.pem
 
 # OS / editor
 .DS_Store

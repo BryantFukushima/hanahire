@@ -14,19 +14,20 @@ build, so explaining the work matters as much as writing it.
 
 ## Tech stack
 
-| Layer          | Choice                                                     |
-| -------------- | ---------------------------------------------------------- |
-| Language       | TypeScript (strict mode)                                   |
-| App framework  | Next.js (App Router), React Server Components where useful |
-| Styling        | Tailwind CSS                                               |
-| Database / ORM | PostgreSQL (Docker locally) + Prisma                       |
-| Validation     | Zod (env vars, API inputs, LLM outputs)                    |
-| Auth           | Auth.js                                                    |
-| AI             | Claude API via the official Anthropic TypeScript SDK       |
-| Browser autofill | Playwright                                               |
-| Testing        | Vitest (unit/integration), Playwright (e2e)                |
-| Package manager | pnpm                                                      |
-| CI             | GitHub Actions                                             |
+| Layer            | Choice                                                                   |
+| ---------------- | ------------------------------------------------------------------------ |
+| Language         | TypeScript (strict mode)                                                 |
+| App framework    | Next.js (App Router), React Server Components where useful               |
+| Styling          | Tailwind CSS                                                             |
+| Database / ORM   | PostgreSQL (Docker locally) + Prisma                                     |
+| Validation       | Zod (env vars, API inputs, LLM outputs)                                  |
+| Auth             | Google + GitHub sign-in; library chosen in ADR 0002 (likely Better Auth) |
+| AI               | Claude API via the official Anthropic TypeScript SDK                     |
+| Browser autofill | Playwright                                                               |
+| Testing          | Vitest (unit/integration), Playwright (e2e)                              |
+| Runtime          | Node.js, latest LTS (pinned in `.nvmrc` + `engines`)                     |
+| Package manager  | pnpm                                                                     |
+| CI               | GitHub Actions                                                           |
 
 Changing anything in this table needs an ADR in `docs/adr/` and the owner's approval.
 Rationale: [ADR 0001](docs/adr/0001-use-typescript-nextjs-stack.md).
@@ -36,32 +37,32 @@ Rationale: [ADR 0001](docs/adr/0001-use-typescript-nextjs-stack.md).
 Project knowledge belongs in the repo, not in chat history or any one tool's memory, so anyone
 (human or agent) can pick up the work. Read these before starting:
 
-| Path                | What it holds                                                          |
-| ------------------- | ---------------------------------------------------------------------- |
-| `docs/ROADMAP.md`   | Phases → PRs, with status                                              |
-| `docs/specs/`       | One spec per phase: requirements, design, tasks, progress log          |
-| `docs/adr/`         | Architecture Decision Records: why significant choices were made       |
-| `AGENTS.md`         | How to work here (this file)                                           |
+| Path              | What it holds                                                    |
+| ----------------- | ---------------------------------------------------------------- |
+| `docs/ROADMAP.md` | Phases → PRs, with status                                        |
+| `docs/specs/`     | One spec per phase: requirements, design, tasks, progress log    |
+| `docs/adr/`       | Architecture Decision Records: why significant choices were made |
+| `AGENTS.md`       | How to work here (this file)                                     |
 
 If you learn something a future contributor needs, such as a decision, constraint, or gotcha,
 write it into the relevant spec or ADR.
 
 ## Commands
 
-> These become available once Phase 0 scaffolding lands. Keep this section up to date when scripts change.
+Requires Node 24 LTS (`nvm use` reads `.nvmrc`) and pnpm. Keep this section up to date when scripts change.
 
 ```bash
 pnpm install          # install dependencies
-pnpm dev              # run the app locally
+pnpm dev              # run the app at http://localhost:3000
 pnpm lint             # ESLint
-pnpm typecheck        # tsc --noEmit
-pnpm test             # Vitest
+pnpm typecheck        # generate Next.js route types, then tsc --noEmit
+pnpm test             # Vitest (run once); pnpm test:watch for watch mode
 pnpm build            # production build
-pnpm db:up            # start local Postgres (Docker)
-pnpm db:migrate       # run Prisma migrations
+pnpm format           # Prettier (write); pnpm format:check to verify
+pnpm check            # all checks: lint, typecheck, test, build, format:check
 ```
 
-Before you say a change is done, run `pnpm lint && pnpm typecheck && pnpm test && pnpm build`.
+Before you say a change is done, run `pnpm check`.
 
 ## Workflow (required)
 
@@ -153,3 +154,17 @@ Don't merge PRs. The owner reviews and merges.
 - `docs/specs/NNN-name.md`: one spec per phase (living document, updated with each PR).
 - `docs/adr/NNNN-title.md`: ADRs (MADR format). Never rewrite an accepted ADR; supersede it with a new one.
 - `README.md`: public-facing and portfolio-quality. Update "Getting started" and "Status" as features land.
+
+## Framework notes
+
+The block below is maintained by Next.js: `next dev` re-adds it if it's missing. Leave it in place.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
