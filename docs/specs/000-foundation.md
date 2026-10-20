@@ -75,7 +75,8 @@ To be detailed per PR during planning. Initial direction:
 
 ## Open questions
 
-- Follow-up: bump Node 24 → 26 in a small chore PR once 26 becomes LTS (2026-10-28).
+- Follow-up: bump Node 24 → 26 in a small chore PR once 26 becomes LTS (2026-10-28). Update
+  `.nvmrc`, `engines`, and `@types/node` together (Dependabot ignores `@types/node` majors).
 - Auth library (Better Auth vs. Auth.js): decide in ADR 0002 when planning PR 0.5
 
 ## Progress log
