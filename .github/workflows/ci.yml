@@ -21,6 +21,23 @@ jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # A throwaway Postgres for this run, matching compose.yaml.
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_USER: hanahire
+          POSTGRES_PASSWORD: hanahire
+          POSTGRES_DB: hanahire
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U hanahire -d hanahire"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 15
+    env:
+      DATABASE_URL: postgresql://hanahire:hanahire@localhost:5432/hanahire
     steps:
       # Actions are pinned to commit SHAs (tags can be moved); Dependabot keeps them updated.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -33,6 +50,10 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
+      # Also runs `prisma generate` via the postinstall script.
       - run: pnpm install --frozen-lockfile
+
+      # Proves the committed migrations apply cleanly to an empty database.
+      - run: pnpm db:deploy
 
       - run: pnpm check

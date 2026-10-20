@@ -21,7 +21,7 @@ Spec: [000-foundation](specs/000-foundation.md)
 | 0.1 | ☑ Project docs | `AGENTS.md`, `CLAUDE.md`, roadmap, specs + ADRs, PR template                               |
 | 0.2 | ☑ Scaffold app | Next.js + TS strict, Tailwind, ESLint/Prettier, Vitest, pnpm scripts, Zod env validation   |
 | 0.3 | ☑ CI           | GitHub Actions: lint, typecheck, test, build on every PR                                   |
-| 0.4 | ☐ Database     | Docker Compose Postgres, Prisma, `User` model, first migration, seed script                |
+| 0.4 | ☑ Database     | Docker Compose Postgres, Prisma, `User` model, first migration, seed script                |
 | 0.5 | ☐ Auth         | Google + GitHub sign-in, email allowlist, protected routes, user-scoped data access helper |
 
 **Learn:** App Router basics, server vs. client components, migrations, CI pipelines, session auth.

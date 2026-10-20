@@ -1,3 +1,10 @@
+# pnpm blocks dependency install scripts unless they're listed here.
 allowBuilds:
+  # Downloads the Prisma schema engine binary used by `prisma migrate`.
+  "@prisma/engines": true
+  # Only a preinstall version check; not needed.
+  prisma: false
+  # The binary ships in a platform-specific optional package; the postinstall check isn't needed.
+  esbuild: false
   sharp: false
   unrs-resolver: false

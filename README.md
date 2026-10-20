@@ -88,16 +88,29 @@ TypeScript · Next.js (App Router) · Tailwind CSS · PostgreSQL + Prisma · Bet
 
 ## Getting started
 
-**Prerequisites:** Node.js 24 LTS (see `.nvmrc`) and [pnpm](https://pnpm.io).
+**Prerequisites:**
+
+- Node.js 24 LTS (see `.nvmrc`) and [pnpm](https://pnpm.io)
+- A Docker runtime with Compose: [Colima](https://github.com/abiosoft/colima) (what I use),
+  [OrbStack](https://orbstack.dev), or [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ```bash
 git clone git@github.com:BryantFukushima/hanahire.git
 cd hanahire
 nvm use              # or install Node 24 LTS another way
 pnpm install
-cp .env.example .env.local
+cp .env.example .env
+pnpm db:up           # start Postgres in Docker
+pnpm db:migrate      # create the database tables
+pnpm db:seed         # add a sample dev user
 pnpm dev             # http://localhost:3000
 ```
+
+Database scripts: `pnpm db:down` (stop), `pnpm db:reset` (wipe, re-migrate, re-seed),
+`pnpm db:studio` (browse tables in the browser).
+
+> **Colima users:** if `docker compose` reports "unknown command", add
+> `"cliPluginsExtraDirs": ["/opt/homebrew/lib/docker/cli-plugins"]` to `~/.docker/config.json`.
 
 Run `pnpm check` to run every check (lint, typecheck, tests, build, formatting) before opening a PR.
 Individual scripts: `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`, `pnpm format`.

@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+// The connection URL comes from prisma.config.ts (CLI) and src/server/db.ts (app).
+datasource db {
+  provider = "postgresql"
+}
+
+// Fields follow Better Auth's core user model so the auth library (PR 0.5) can adopt this table.
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  emailVerified Boolean  @default(false)
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("user")
+}

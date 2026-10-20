@@ -17,6 +17,7 @@ dist/
 build/
 .next/
 out/
+src/generated/
 *.tsbuildinfo
 next-env.d.ts
 .vercel

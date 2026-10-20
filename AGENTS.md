@@ -49,7 +49,8 @@ write it into the relevant spec or ADR.
 
 ## Commands
 
-Requires Node 24 LTS (`nvm use` reads `.nvmrc`) and pnpm. Keep this section up to date when scripts change.
+Requires Node 24 LTS (`nvm use` reads `.nvmrc`), pnpm, and a Docker runtime with Compose.
+Keep this section up to date when scripts change.
 
 ```bash
 pnpm install          # install dependencies
@@ -60,7 +61,19 @@ pnpm test             # Vitest (run once); pnpm test:watch for watch mode
 pnpm build            # production build
 pnpm format           # Prettier (write); pnpm format:check to verify
 pnpm check            # all checks: lint, typecheck, test, build, format:check
+
+pnpm db:up            # start local Postgres (Docker Compose) and wait until healthy
+pnpm db:down          # stop it (data is kept in a Docker volume)
+pnpm db:migrate       # after editing prisma/schema.prisma: create + apply a migration
+pnpm db:deploy        # apply committed migrations only (CI / production)
+pnpm db:generate      # regenerate the Prisma client (also runs on pnpm install)
+pnpm db:seed          # load sample dev data
+pnpm db:reset         # wipe the database, re-apply migrations, re-seed (asks to confirm)
+pnpm db:studio        # browse tables in Prisma Studio
 ```
+
+`pnpm dev`, `pnpm build`, and `pnpm check` need `DATABASE_URL`: run `pnpm db:up` and copy
+`.env.example` to `.env` first.
 
 Before you say a change is done, run `pnpm check`. CI (`.github/workflows/ci.yml`) runs the same
 command on every PR and push to `main`, and its `check` job must pass before a PR can merge.
@@ -147,6 +160,11 @@ Don't merge PRs. The owner reviews and merges.
 
 - Never commit secrets, `.env` files, real resumes, or real personal data. Use synthetic fixtures.
 - Validate all env vars at startup with Zod. Keep `.env.example` current.
+- Database access goes through `src/server/db.ts` (server-only). Never import it into client components.
+- Every schema change ships as a committed migration (`pnpm db:migrate --name <change>`). Never
+  edit an applied migration or change the database by hand.
+- Never run destructive database commands (`pnpm db:reset`, `prisma migrate reset`, dropping
+  tables) without the owner's explicit consent, and only against the local development database.
 - Treat resume text and job descriptions as untrusted input, including in LLM prompts (prompt injection).
 - Validate LLM outputs with Zod schemas before you persist or act on them.
 - Scope every database query to the signed-in user.
