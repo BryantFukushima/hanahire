@@ -1,5 +1,7 @@
 # HanaHire
 
+[![CI](https://github.com/BryantFukushima/hanahire/actions/workflows/ci.yml/badge.svg)](https://github.com/BryantFukushima/hanahire/actions/workflows/ci.yml)
+
 > **We draft. You decide. You get hired.**
 
 HanaHire is an AI-powered job search copilot. Upload your resume, tell it what you're looking for, and it finds, ranks, and helps you apply to the jobs that actually fit you — with you approving every application before it goes out.

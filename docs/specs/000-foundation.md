@@ -69,7 +69,7 @@ To be detailed per PR during planning. Initial direction:
 
 - [x] **PR 0.1: Project docs** (branch `phase-0/project-docs`)
 - [x] **PR 0.2: Scaffold app** (branch `phase-0/0.2-scaffold`)
-- [ ] **PR 0.3: CI** (branch `phase-0/0.3-ci`)
+- [x] **PR 0.3: CI** (branch `phase-0/0.3-ci`)
 - [ ] **PR 0.4: Database** (branch `phase-0/0.4-database`)
 - [ ] **PR 0.5: Auth** (branch `phase-0/0.5-auth`)
 
@@ -85,3 +85,4 @@ To be detailed per PR during planning. Initial direction:
 - 2026-10-19: Resolved: Google + GitHub providers with email allowlist; latest Node LTS.
 - 2026-10-19: Spec approved.
 - 2026-10-19: PR 0.2 scaffolds Next.js 16.4 (App Router, Tailwind v4, Turbopack), Vitest, Prettier, and Zod env validation. Pinned Node 24 LTS (bump to 26 after it becomes LTS on 2026-10-28) and TypeScript 6.0.3 (typescript-eslint doesn't support TS 7 yet).
+- 2026-10-19: PR 0.3 adds GitHub Actions CI (`pnpm check` on PRs and pushes to `main`, actions pinned to SHAs) and Dependabot (weekly, grouped). The `check` job becomes a required status check in the `protect-main` ruleset after merge.

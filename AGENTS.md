@@ -62,7 +62,9 @@ pnpm format           # Prettier (write); pnpm format:check to verify
 pnpm check            # all checks: lint, typecheck, test, build, format:check
 ```
 
-Before you say a change is done, run `pnpm check`.
+Before you say a change is done, run `pnpm check`. CI (`.github/workflows/ci.yml`) runs the same
+command on every PR and push to `main`, and its `check` job must pass before a PR can merge.
+Dependabot (`.github/dependabot.yml`) opens weekly update PRs for npm packages and GitHub Actions.
 
 ## Workflow (required)
 

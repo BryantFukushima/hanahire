@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "chore(ci)"
+
+  - package-ecosystem: npm # also handles pnpm (pnpm-lock.yaml)
+    directory: /
+    schedule:
+      interval: weekly
+    # Wait a few days before proposing a new release, so compromised or broken versions
+    # are usually caught and pulled before they reach this repo.
+    cooldown:
+      default-days: 5
+    groups:
+      # Minor and patch updates arrive as one weekly PR; major versions get their own PRs.
+      minor-and-patch:
+        update-types: [minor, patch]
+    commit-message:
+      prefix: "chore(deps)"
