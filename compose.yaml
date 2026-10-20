@@ -1,0 +1,22 @@
+# Local development database. Start with `pnpm db:up`, stop with `pnpm db:down`.
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      # Local-only credentials; must match DATABASE_URL in .env.
+      POSTGRES_USER: hanahire
+      POSTGRES_PASSWORD: hanahire
+      POSTGRES_DB: hanahire
+    ports:
+      - "5432:5432"
+    volumes:
+      # Postgres 18+ images keep data under /var/lib/postgresql/<version>, so mount the parent.
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hanahire -d hanahire"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+volumes:
+  db-data:

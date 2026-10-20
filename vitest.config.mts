@@ -8,6 +8,10 @@ export default defineConfig({
   },
   test: {
     environment: "node",
+    // Unit tests don't read .env. Provide placeholder values for variables src/env.ts requires.
+    env: {
+      DATABASE_URL: "postgresql://test:test@localhost:5432/test",
+    },
     include: ["src/**/*.test.{ts,tsx}"],
   },
 });
