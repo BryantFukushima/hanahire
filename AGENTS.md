@@ -55,6 +55,7 @@ Keep this section up to date when scripts change.
 ```bash
 pnpm install          # install dependencies
 pnpm dev              # run the app at http://localhost:3000
+pnpm dev:all          # start Postgres (if needed), then the app
 pnpm lint             # ESLint
 pnpm typecheck        # generate Next.js route types, then tsc --noEmit
 pnpm test             # Vitest (run once); pnpm test:watch for watch mode
@@ -161,6 +162,12 @@ Don't merge PRs. The owner reviews and merges.
 - Never commit secrets, `.env` files, real resumes, or real personal data. Use synthetic fixtures.
 - Validate all env vars at startup with Zod. Keep `.env.example` current.
 - Database access goes through `src/server/db.ts` (server-only). Never import it into client components.
+- Every protected page, server action, and route handler calls `requireUser()` (`src/server/session.ts`)
+  and scopes data queries to the returned user's id. `src/proxy.ts` is only an optimistic redirect,
+  not an auth check.
+- Auth is configured in `src/server/auth.ts` (Better Auth, ADR 0002). Don't weaken its protections
+  (allowlist hooks, OAuth token encryption, origin checks) without an ADR.
+- Never log, print, or put in URLs: cookies, session tokens, OAuth tokens, or secrets.
 - Every schema change ships as a committed migration (`pnpm db:migrate --name <change>`). Never
   edit an applied migration or change the database by hand.
 - Never run destructive database commands (`pnpm db:reset`, `prisma migrate reset`, dropping

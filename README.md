@@ -106,11 +106,32 @@ pnpm db:seed         # add a sample dev user
 pnpm dev             # http://localhost:3000
 ```
 
+Day to day, `pnpm dev:all` starts Postgres (if it isn't running) and the app in one step.
+
 Database scripts: `pnpm db:down` (stop), `pnpm db:reset` (wipe, re-migrate, re-seed),
 `pnpm db:studio` (browse tables in the browser).
 
 > **Colima users:** if `docker compose` reports "unknown command", add
 > `"cliPluginsExtraDirs": ["/opt/homebrew/lib/docker/cli-plugins"]` to `~/.docker/config.json`.
+
+### Setting up sign-in
+
+HanaHire signs users in with Google and GitHub, and only emails in `ALLOWED_EMAILS` can get in.
+Fill in these values in `.env`:
+
+1. **`BETTER_AUTH_SECRET`:** run `openssl rand -base64 32` and paste the output.
+2. **GitHub:** [Developer settings → OAuth Apps](https://github.com/settings/developers) → New OAuth App.
+   - Homepage URL: `http://localhost:3000`
+   - Authorization callback URL: `http://localhost:3000/api/auth/callback/github`
+   - Copy the client ID and a new client secret into `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET`.
+3. **Google:** [Google Cloud Console](https://console.cloud.google.com) → Google Auth Platform.
+   - Audience: External, in Testing mode. Add your Google account as a test user.
+   - Create a Web application client with origin `http://localhost:3000` and redirect URI
+     `http://localhost:3000/api/auth/callback/google`.
+   - Copy the client ID and secret into `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET`.
+4. **`ALLOWED_EMAILS`:** the email(s) you'll sign in with, comma-separated.
+
+Then run `pnpm dev`, open http://localhost:3000/sign-in, and sign in.
 
 Run `pnpm check` to run every check (lint, typecheck, tests, build, formatting) before opening a PR.
 Individual scripts: `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`, `pnpm format`.

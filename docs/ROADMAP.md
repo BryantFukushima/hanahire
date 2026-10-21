@@ -16,13 +16,14 @@ Legend: ☐ not started · ◐ in progress · ☑ merged · ✍️ hand-written 
 Goal: a working, tested, deployable empty app with a database and sign-in.
 Spec: [000-foundation](specs/000-foundation.md)
 
-| PR  | Title          | Scope                                                                                      |
-| --- | -------------- | ------------------------------------------------------------------------------------------ |
-| 0.1 | ☑ Project docs | `AGENTS.md`, `CLAUDE.md`, roadmap, specs + ADRs, PR template                               |
-| 0.2 | ☑ Scaffold app | Next.js + TS strict, Tailwind, ESLint/Prettier, Vitest, pnpm scripts, Zod env validation   |
-| 0.3 | ☑ CI           | GitHub Actions: lint, typecheck, test, build on every PR                                   |
-| 0.4 | ☑ Database     | Docker Compose Postgres, Prisma, `User` model, first migration, seed script                |
-| 0.5 | ☐ Auth         | Google + GitHub sign-in, email allowlist, protected routes, user-scoped data access helper |
+| PR  | Title             | Scope                                                                                                              |
+| --- | ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| 0.1 | ☑ Project docs    | `AGENTS.md`, `CLAUDE.md`, roadmap, specs + ADRs, PR template                                                       |
+| 0.2 | ☑ Scaffold app    | Next.js + TS strict, Tailwind, ESLint/Prettier, Vitest, pnpm scripts, Zod env validation                           |
+| 0.3 | ☑ CI              | GitHub Actions: lint, typecheck, test, build on every PR                                                           |
+| 0.4 | ☑ Database        | Docker Compose Postgres, Prisma, `User` model, first migration, seed script                                        |
+| 0.5 | ☑ Auth            | Google + GitHub sign-in, email allowlist, encrypted OAuth tokens, protected routes, user-scoped data access helper |
+| 0.6 | ☐ Security policy | `SECURITY.md`: vulnerability reporting, and a summary of the security approach (encryption, auth, data handling)   |
 
 **Learn:** App Router basics, server vs. client components, migrations, CI pipelines, session auth.
 
@@ -30,14 +31,15 @@ Spec: [000-foundation](specs/000-foundation.md)
 
 Goal: the user uploads a resume and gets a structured, editable profile.
 
-| PR  | Title                     | Scope                                                                                       |
-| --- | ------------------------- | ------------------------------------------------------------------------------------------- |
-| 1.1 | ☐ Upload                  | Upload UI, file type/size validation, storage behind an interface (local disk in dev)       |
-| 1.2 | ☐ Text extraction         | PDF/DOCX → plain text, synthetic test fixtures                                              |
-| 1.3 | ☐ LLM structured parsing  | Claude API → Zod-validated `Profile` (skills, roles, seniority, education); prompt + evals  |
-| 1.4 | ☐ Profile and preferences | Review/edit parsed profile; preferences form (role, salary, location, remote/hybrid/onsite) |
+| PR  | Title                     | Scope                                                                                                                     |
+| --- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| 1.1 | ☐ Upload                  | Upload UI, file type/size validation, storage behind an interface (local disk in dev), **resume files encrypted at rest** |
+| 1.2 | ☐ Text extraction         | PDF/DOCX → plain text, synthetic test fixtures                                                                            |
+| 1.3 | ☐ LLM structured parsing  | Claude API → Zod-validated `Profile` (skills, roles, seniority, education); prompt + evals                                |
+| 1.4 | ☐ Profile and preferences | Review/edit parsed profile; preferences form (role, salary, location, remote/hybrid/onsite)                               |
 
 **Learn:** file uploads, structured LLM output, schema validation, prompt injection basics.
+**Security:** resumes are personal data, so uploaded files and parsed profile data are encrypted at rest from the first PR that stores them (moved here from Phase 8).
 **Gotcha:** `.gitignore` ignores `*.pdf`/`*.docx`, so synthetic fixtures need an explicit `!tests/fixtures/**` exception.
 
 ## Phase 2: Job ingestion and search
@@ -90,12 +92,12 @@ Goal: drafted answers to common application questions.
 
 Goal: pre-filled applications that never submit without the user's explicit OK.
 
-| PR  | Title                       | Scope                                                                                     |
-| --- | --------------------------- | ----------------------------------------------------------------------------------------- |
-| 6.1 | ☐ ADR + spike               | Decide on a local Playwright runner or a browser extension; prototype on one ATS          |
-| 6.2 | ☐ ✍️ Approval state machine | `Application` model: draft → ready → approved → submitted, enforced server-side           |
-| 6.3 | ☐ Autofill runner           | Fill a Greenhouse application from profile + answers, stop before submit, show for review |
-| 6.4 | ☐ More ATS support          | Lever / Ashby form mappings                                                               |
+| PR  | Title                       | Scope                                                                                                                                 |
+| --- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| 6.1 | ☐ ADR + spike               | Decide on a local Playwright runner or a browser extension; prototype on one ATS                                                      |
+| 6.2 | ☐ ✍️ Approval state machine | `Application` model: draft → ready → approved → submitted, enforced server-side. Approving requires a fresh session (recent sign-in). |
+| 6.3 | ☐ Autofill runner           | Fill a Greenhouse application from profile + answers, stop before submit, show for review                                             |
+| 6.4 | ☐ More ATS support          | Lever / Ashby form mappings                                                                                                           |
 
 **Learn:** browser automation, state machines, why safety gates belong on the server.
 **Gotcha:** headless browsers don't run on typical serverless hosting, which is why 6.1 is an ADR.
@@ -115,11 +117,11 @@ Goal: one place to see every application and where it stands.
 
 Goal: deployed, private-by-design, and portfolio-ready.
 
-| PR  | Title              | Scope                                                                      |
-| --- | ------------------ | -------------------------------------------------------------------------- |
-| 8.1 | ☐ Deploy           | Vercel + managed Postgres, production env, secrets handling                |
-| 8.2 | ☐ Privacy controls | Delete-my-data, file encryption at rest, data retention policy             |
-| 8.3 | ☐ Demo mode        | Seeded fake persona so visitors can try it without uploading a real resume |
-| 8.4 | ☐ Portfolio polish | README screenshots/GIFs, architecture diagram, case-study write-up         |
+| PR  | Title              | Scope                                                                                                  |
+| --- | ------------------ | ------------------------------------------------------------------------------------------------------ |
+| 8.1 | ☐ Deploy           | Vercel + managed Postgres, production env, secrets handling                                            |
+| 8.2 | ☐ Privacy controls | Delete-my-data, data retention policy, review of encryption coverage (resume encryption starts in 1.1) |
+| 8.3 | ☐ Demo mode        | Seeded fake persona so visitors can try it without uploading a real resume                             |
+| 8.4 | ☐ Portfolio polish | README screenshots/GIFs, architecture diagram, case-study write-up                                     |
 
 **Learn:** production deployment, privacy engineering, presenting technical work.
