@@ -7,6 +7,27 @@ const envSchema = z.object({
     .enum(["development", "test", "production"])
     .default("development"),
   DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
+
+  // Better Auth: signs session cookies and encrypts stored OAuth tokens.
+  // Generate with `openssl rand -base64 32`.
+  BETTER_AUTH_SECRET: z.string().min(32),
+  BETTER_AUTH_URL: z.url(),
+
+  GOOGLE_CLIENT_ID: z.string().min(1),
+  GOOGLE_CLIENT_SECRET: z.string().min(1),
+  GITHUB_CLIENT_ID: z.string().min(1),
+  GITHUB_CLIENT_SECRET: z.string().min(1),
+
+  // Comma-separated emails allowed to sign in, e.g. "a@x.com, b@y.com".
+  ALLOWED_EMAILS: z
+    .string()
+    .transform((value) =>
+      value
+        .split(",")
+        .map((email) => email.trim().toLowerCase())
+        .filter(Boolean),
+    )
+    .pipe(z.array(z.email()).min(1)),
 });
 
 export type Env = z.infer<typeof envSchema>;

@@ -18,3 +18,4 @@ to `NNNN-short-title.md`.
 | ADR                                         | Title                                 | Status   |
 | ------------------------------------------- | ------------------------------------- | -------- |
 | [0001](0001-use-typescript-nextjs-stack.md) | Use a full TypeScript / Next.js stack | Accepted |
+| [0002](0002-use-better-auth.md)             | Use Better Auth for authentication    | Accepted |

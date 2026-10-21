@@ -73,13 +73,13 @@ To be detailed per PR during planning. Initial direction:
 - [x] **PR 0.2: Scaffold app** (branch `phase-0/0.2-scaffold`)
 - [x] **PR 0.3: CI** (branch `phase-0/0.3-ci`)
 - [x] **PR 0.4: Database** (branch `phase-0/0.4-database`)
-- [ ] **PR 0.5: Auth** (branch `phase-0/0.5-auth`)
+- [x] **PR 0.5: Auth** (branch `phase-0/0.5-auth`)
+- [ ] **PR 0.6: Security policy** (branch `phase-0/0.6-security-policy`): `SECURITY.md`
 
 ## Open questions
 
 - Follow-up: bump Node 24 → 26 in a small chore PR once 26 becomes LTS (2026-10-28). Update
   `.nvmrc`, `engines`, and `@types/node` together (Dependabot ignores `@types/node` majors).
-- Auth library (Better Auth vs. Auth.js): decide in ADR 0002 when planning PR 0.5
 
 ## Progress log
 
@@ -90,3 +90,4 @@ To be detailed per PR during planning. Initial direction:
 - 2026-10-19: PR 0.2 scaffolds Next.js 16.4 (App Router, Tailwind v4, Turbopack), Vitest, Prettier, and Zod env validation. Pinned Node 24 LTS (bump to 26 after it becomes LTS on 2026-10-28) and TypeScript 6.0.3 (typescript-eslint doesn't support TS 7 yet).
 - 2026-10-19: PR 0.3 adds GitHub Actions CI (`pnpm check` on PRs and pushes to `main`, actions pinned to SHAs) and Dependabot (weekly, grouped). The `check` job becomes a required status check in the `protect-main` ruleset after merge.
 - 2026-10-19: PR 0.4 adds Postgres 18 via Docker Compose, Prisma 7.10.1 (pinned stable; npm `latest` points at an 8.0 RC), the `User` model + init migration, seed script, `db:*` scripts, and a Postgres service in CI. Local env file is now `.env` (Prisma's CLI doesn't read `.env.local`). Prisma 7 changes handled: `migrate dev`/`migrate reset` no longer generate or seed automatically.
+- 2026-10-19: PR 0.5 adds Better Auth 1.7.10 (ADR 0002): Google + GitHub sign-in, email allowlist enforced in database hooks (new users and every new session), encrypted OAuth access/refresh tokens, ID tokens not stored, 3-day idle sessions, `requireUser()`, sign-in and dashboard pages, and an optimistic `proxy.ts`. Session tokens are stored unhashed in `session` (Better Auth default), mitigated by short expiry and revocation.
